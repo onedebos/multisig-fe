@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { Fragment, FunctionComponent } from "react";
 import { shortenAddress } from "../../helpers";
 
 interface SeeProposalsProps {
@@ -25,8 +25,8 @@ const SeeProposals: FunctionComponent<SeeProposalsProps> = ({ proposals, contrac
         <p className="font-medium text-gray-400 text-center">Status</p>
       </div>
       <div className="grid items-center text-center grid-cols-5 gap-4">
-        {proposals?.map((proposal) => (
-          <>
+        {proposals?.map((proposal, index) => (
+          <Fragment key={index}>
             <p>{proposal.paymentAmt}</p>
             <p>{shortenAddress(proposal.receiver)}</p>
             <p>{proposal.voters.length}</p>
@@ -40,7 +40,7 @@ const SeeProposals: FunctionComponent<SeeProposalsProps> = ({ proposals, contrac
             >
               Approve
             </button>
-          </>
+          </Fragment>
         ))}
       </div>
     </div>
