@@ -19,10 +19,10 @@ const SeeProposals: FunctionComponent<SeeProposalsProps> = ({ proposals, contrac
       <h2 className="text-xl">Proposals in this Contract</h2>
       <p className="text-gray-500 mb-5">Contract Address: {shortenAddress(contractAddress)}</p>
       <div className="grid grid-cols-5 bg-gray-500 p-2 rounded-sm mb-3">
-        <p className="font-medium text-gray-400 text-center">Payment Amt.</p>
-        <p className="font-medium text-gray-400 text-center">Receiver</p>
-        <p className="font-medium text-gray-400 text-center">No. of Votes</p>
-        <p className="font-medium text-gray-400 text-center">Status</p>
+        <p className="font-medium text-gray-200 text-center">Payment Amt.</p>
+        <p className="font-medium text-gray-200 text-center">Receiver</p>
+        <p className="font-medium text-gray-200 text-center">No. of Votes</p>
+        <p className="font-medium text-gray-200 text-center">Status</p>
       </div>
       <div className="grid items-center text-center grid-cols-5 gap-4">
         {proposals?.map((proposal, index) => (
