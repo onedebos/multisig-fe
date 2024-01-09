@@ -23,5 +23,3 @@ The original contract can be found in this [repository](https://github.com/onede
 Learn more about building on [Tezos](https://docs.tezos.com)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
