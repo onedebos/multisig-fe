@@ -1,11 +1,14 @@
 import { FunctionComponent } from "react";
+import { shortenAddress } from "../../helpers";
 
 type SidebarProps = {
   isConnected: boolean;
   showSeeProposal: any;
+  connectWallet: () => void;
+  walletAddress: string;
 };
 
-const Sidebar: FunctionComponent<SidebarProps> = ({ isConnected, showSeeProposal }) => {
+const Sidebar: FunctionComponent<SidebarProps> = ({ isConnected, showSeeProposal, connectWallet, walletAddress }) => {
   return (
     <div className="mt-10 p-10 bg-gray-800 max-w-sm rounded-lg">
       <h3 className="text-center font-medium text-xl">MultiXTZ Sig</h3>
@@ -23,9 +26,13 @@ const Sidebar: FunctionComponent<SidebarProps> = ({ isConnected, showSeeProposal
           Submit a Proposal
         </button>
 
-        <button className={`${!isConnected ? "bg-green-600" : "bg-red-700"} p-2 rounded-md mt-8`}>
-          {!isConnected ? "Connect Wallet" : "Disconnect Wallet"}
-        </button>
+        <div className="mt-8">
+          <p>{shortenAddress(walletAddress)}</p>
+
+          <button onClick={connectWallet} className={`${!isConnected ? "bg-green-600" : "bg-red-700"} p-2 rounded-md`}>
+            {!isConnected ? "Connect Wallet" : "Disconnect Wallet"}
+          </button>
+        </div>
       </div>
     </div>
   );
