@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <main className="bg-gray-900 p-10 min-h-screen flex gap-4">
-      <Sidebar isConnected={true} showSeeProposal={setIsSeeProposalsScreen} />
+      <Sidebar isConnected={true} showSeeProposal={setIsSeeProposalsScreen} connectWallet={connectWallet} />
       {isSeeProposalsScreen ? (
         <SeeProposals proposals={proposals} contractAddress={contractAddress} />
       ) : (
