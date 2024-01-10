@@ -1,7 +1,12 @@
 import { BeaconWallet } from "@taquito/beacon-wallet";
 import { TezosToolkit } from "@taquito/taquito";
 import { NetworkType } from "@airgap/beacon-sdk";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
+
+type sendFundsToSmartContractTypes = {
+  amount: string;
+  receiver: string;
+};
 
 const useTaquito = () => {
   const rpcUrl = "https://ghostnet.ecadinfra.com";
@@ -11,48 +16,70 @@ const useTaquito = () => {
 
   const [walletAddress, setWalletAddress] = useState("");
   const [proposals, setProposals] = useState([]);
+  const [isConnected, setIsConnected] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   let wallet: BeaconWallet;
 
-  useEffect(() => {
-    async () => {
+  const connectWallet = async () => {
+    try {
       wallet = new BeaconWallet({
         name: "MultiSig dApp",
         preferredNetwork: network,
       });
 
       Tezos.setWalletProvider(wallet);
-    };
-  }, []);
 
-  const connectWallet = async () => {
-    try {
-      await wallet!.requestPermissions({
+      await wallet.requestPermissions({
         network: {
           type: NetworkType.GHOSTNET,
           rpcUrl,
         },
       });
       const address = await wallet.getPKH();
-      console.log({ address });
+      console.log({ address, wallet });
       setWalletAddress(address);
+      setIsConnected(true);
     } catch (error) {
       console.log(error);
     }
   };
 
   const disconnectWallet = () => {
-    wallet.clearActiveAccount();
+    wallet?.clearActiveAccount();
+    console.log({ wallet });
     setWalletAddress("");
+    setIsConnected(false);
+  };
+
+  const sendFundsToSmartContract = async (amount: number, receiver: string) => {
+    // const amtInMutez = parseInt(amount) * (10^6)
+    if (amount && receiver) {
+      setLoading(true);
+      try {
+        const op = await Tezos.wallet.transfer({ to: receiver, amount }).send();
+        await op.confirmation();
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
   };
 
   const getSmartContractStorage = () => {};
 
   const setSmartContractStorage = () => {};
 
-  const sendFundsToSmartContract = () => {};
-
-  return { walletAddress, connectWallet, disconnectWallet, contractAddress, proposals };
+  return {
+    walletAddress,
+    connectWallet,
+    disconnectWallet,
+    contractAddress,
+    proposals,
+    isConnected,
+    sendFundsToSmartContract,
+  };
 };
 
 export default useTaquito;

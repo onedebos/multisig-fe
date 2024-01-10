@@ -6,24 +6,29 @@ import { useState } from "react";
 
 export default function Home() {
   const [isSeeProposalsScreen, setIsSeeProposalsScreen] = useState(true);
-  const { walletAddress, connectWallet, contractAddress } = useTaquito();
-
-  const proposals = [
-    {
-      paymentAmt: "20",
-      votingComplete: true,
-      receiver: "tz1ayagi1KJN4Hfiu51CzBFTXuHabVhTUvzD",
-      voters: ["tz1ayagi1KJN4Hfiu51CzBFTXuHabVhTUvzD", "tz1ayagi1KJN4Hfiu51CzBFTXuHabVhTUvzD"],
-    },
-  ];
+  const {
+    walletAddress,
+    connectWallet,
+    contractAddress,
+    proposals,
+    isConnected,
+    disconnectWallet,
+    sendFundsToSmartContract,
+  } = useTaquito();
 
   return (
     <main className="bg-gray-900 p-10 min-h-screen flex gap-4">
-      <Sidebar isConnected={true} showSeeProposal={setIsSeeProposalsScreen} />
+      <Sidebar
+        isConnected={isConnected}
+        showSeeProposal={setIsSeeProposalsScreen}
+        connectWallet={connectWallet}
+        walletAddress={walletAddress}
+        disconnectWallet={disconnectWallet}
+      />
       {isSeeProposalsScreen ? (
         <SeeProposals proposals={proposals} contractAddress={contractAddress} />
       ) : (
-        <SubmitProposal />
+        <SubmitProposal sendFundsToSmartContract={sendFundsToSmartContract} />
       )}
     </main>
   );
