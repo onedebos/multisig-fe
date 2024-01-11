@@ -1,10 +1,11 @@
 import Sidebar from "@/components/Sidebar";
 import SubmitProposal from "@/components/SubmitProposal";
 import SeeProposals from "@/components/SeeProposals";
+import SendFundsToContract from "@/components/SendFundsToContract";
 import { FormEvent, useState } from "react";
 
 export default function Home() {
-  const [isSeeProposalsScreen, setIsSeeProposalsScreen] = useState(true);
+  const [showScreen, setShowScreen] = useState("seeProposals");
 
   const proposals = [
     {
@@ -23,13 +24,18 @@ export default function Home() {
     console.log(e.target.elements.receiver.value);
   };
 
+  const handleSubmitSendFunds = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e.target.elements.amtToSend.value);
+  };
+
   return (
     <main className="bg-gray-900 p-10 min-h-screen flex gap-4">
-      <Sidebar isConnected={true} showSeeProposal={setIsSeeProposalsScreen} connectWallet={() => {}} />
-      {isSeeProposalsScreen ? (
-        <SeeProposals proposals={proposals} contractAddress={contractAddress} />
-      ) : (
-        <SubmitProposal handleSubmit={handleSubmit} />
+      <Sidebar isConnected={true} showScreen={setShowScreen} connectWallet={() => {}} />
+      {showScreen === "seeProposals" && <SeeProposals proposals={proposals} contractAddress={contractAddress} />}
+      {showScreen === "submitProposal" && <SubmitProposal handleSubmit={handleSubmit} />}
+      {showScreen === "sendFunds" && (
+        <SendFundsToContract contractBalance={3} handleSubmitSendFunds={handleSubmitSendFunds} />
       )}
     </main>
   );
