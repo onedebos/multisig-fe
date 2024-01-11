@@ -2,7 +2,7 @@ import Sidebar from "@/components/Sidebar";
 import SubmitProposal from "@/components/SubmitProposal";
 import SeeProposals from "@/components/SeeProposals";
 import useTaquito from "@/hooks/useTaquito";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function Home() {
   const [isSeeProposalsScreen, setIsSeeProposalsScreen] = useState(true);
@@ -16,6 +16,12 @@ export default function Home() {
     sendFundsToSmartContract,
   } = useTaquito();
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e.target.elements.paymentAmt.value);
+    console.log(e.target.elements.receiver.value);
+  };
+
   return (
     <main className="bg-gray-900 p-10 min-h-screen flex gap-4">
       <Sidebar
@@ -28,7 +34,7 @@ export default function Home() {
       {isSeeProposalsScreen ? (
         <SeeProposals proposals={proposals} contractAddress={contractAddress} />
       ) : (
-        <SubmitProposal sendFundsToSmartContract={sendFundsToSmartContract} />
+        <SubmitProposal handleSubmit={handleSubmit} />
       )}
     </main>
   );
