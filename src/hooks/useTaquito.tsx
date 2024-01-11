@@ -53,7 +53,6 @@ const useTaquito = () => {
   };
 
   const sendFundsToSmartContract = async (amount: number, receiver: string) => {
-    // const amtInMutez = parseInt(amount) * (10^6)
     if (amount && receiver) {
       setLoading(true);
       try {
