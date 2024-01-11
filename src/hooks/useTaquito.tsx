@@ -28,15 +28,15 @@ const useTaquito = () => {
         preferredNetwork: network,
       });
 
-      Tezos.setWalletProvider(wallet);
-
       await wallet.requestPermissions({
         network: {
           type: NetworkType.GHOSTNET,
           rpcUrl,
         },
       });
+      Tezos.setProvider({ wallet });
       const address = await wallet.getPKH();
+
       console.log({ address, wallet });
       setWalletAddress(address);
       setIsConnected(true);
@@ -52,10 +52,12 @@ const useTaquito = () => {
     setIsConnected(false);
   };
 
-  const sendFundsToSmartContract = async (amount: number, receiver: string) => {
-    if (amount && receiver) {
+  const sendFundsToSmartContract = async (amount: number) => {
+    const receiver = "KT1QfJbWR1Hg3R8FtSnmuPv4mpvekqZuZi7a";
+    if (amount) {
       setLoading(true);
       try {
+        await connectWallet();
         const op = await Tezos.wallet.transfer({ to: receiver, amount }).send();
         await op.confirmation();
         setLoading(false);
