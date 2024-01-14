@@ -40,13 +40,11 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
         </button>
 
         <div className="mt-8">
-          <p>{shortenAddress(walletAddress)}</p>
-
           <button
             onClick={!isConnected ? connectWallet : disconnectWallet}
             className={`${!isConnected ? "bg-green-600" : "bg-red-700"} p-2 rounded-md w-full`}
           >
-            {!isConnected ? "Connect Wallet" : "Disconnect Wallet"}
+            {!isConnected ? "Connect Wallet" : shortenAddress(walletAddress)}
           </button>
         </div>
       </div>

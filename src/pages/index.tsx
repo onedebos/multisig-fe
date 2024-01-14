@@ -15,22 +15,28 @@ export default function Home() {
     isConnected,
     disconnectWallet,
     sendFundsToSmartContract,
+    setSmartContractStorage,
+    loading,
+    message,
+    contractBalance,
+    voteOnProposal,
   } = useTaquito();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(e.target.elements.paymentAmt.value);
-    console.log(e.target.elements.receiver.value);
+    const paymentAmt = parseInt(e.target.elements.paymentAmt.value);
+    const receiver = e.target.elements.receiver.value;
+    setSmartContractStorage(receiver, paymentAmt);
   };
 
-  const handleSubmitSendFunds = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmitSendFunds = (e: any) => {
     e.preventDefault();
-    console.log(e.target.elements.amtToSend.value);
     sendFundsToSmartContract(e.target.elements.amtToSend.value);
   };
 
   return (
     <main className="bg-gray-900 p-10 min-h-screen flex gap-4">
+      <p className="text-center">{message.msg}</p>
       <Sidebar
         isConnected={isConnected}
         showScreen={setShowScreen}
@@ -38,10 +44,16 @@ export default function Home() {
         walletAddress={walletAddress}
         disconnectWallet={disconnectWallet}
       />
-      {showScreen === "seeProposals" && <SeeProposals proposals={proposals} contractAddress={contractAddress} />}
-      {showScreen === "submitProposal" && <SubmitProposal handleSubmit={handleSubmit} />}
+      {showScreen === "seeProposals" && (
+        <SeeProposals proposals={proposals} contractAddress={contractAddress} voteOnProposal={voteOnProposal} />
+      )}
+      {showScreen === "submitProposal" && <SubmitProposal handleSubmit={handleSubmit} loading={loading} />}
       {showScreen === "sendFunds" && (
-        <SendFundsToContract contractBalance={3} handleSubmitSendFunds={handleSubmitSendFunds} />
+        <SendFundsToContract
+          contractBalance={contractBalance}
+          handleSubmitSendFunds={handleSubmitSendFunds}
+          loading={loading}
+        />
       )}
     </main>
   );
