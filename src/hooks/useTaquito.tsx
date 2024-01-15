@@ -12,39 +12,9 @@ const useTaquito = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [proposals, setProposals] = useState([]);
 
-  let wallet: BeaconWallet;
+  const connectWallet = async () => {};
 
-  useEffect(() => {
-    async () => {
-      wallet = new BeaconWallet({
-        name: "MultiSig dApp",
-        preferredNetwork: network,
-      });
-
-      Tezos.setWalletProvider(wallet);
-    };
-  }, []);
-
-  const connectWallet = async () => {
-    try {
-      await wallet!.requestPermissions({
-        network: {
-          type: NetworkType.GHOSTNET,
-          rpcUrl,
-        },
-      });
-      const address = await wallet.getPKH();
-      console.log({ address });
-      setWalletAddress(address);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const disconnectWallet = () => {
-    wallet.clearActiveAccount();
-    setWalletAddress("");
-  };
+  const disconnectWallet = () => {};
 
   const getSmartContractStorage = () => {};
 

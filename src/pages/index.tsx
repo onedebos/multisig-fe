@@ -3,9 +3,12 @@ import SubmitProposal from "@/components/SubmitProposal";
 import SeeProposals from "@/components/SeeProposals";
 import SendFundsToContract from "@/components/SendFundsToContract";
 import { FormEvent, useState } from "react";
+import useTaquito from "@/hooks/useTaquito";
 
 export default function Home() {
   const [showScreen, setShowScreen] = useState("seeProposals");
+
+  const { contractAddress } = useTaquito();
 
   const proposals = [
     {
@@ -16,15 +19,13 @@ export default function Home() {
     },
   ];
 
-  const contractAddress = "KT1QfJbWR1Hg3R8FtSnmuPv4mpvekqZuZi7a";
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log(e.target.elements.paymentAmt.value);
     console.log(e.target.elements.receiver.value);
   };
 
-  const handleSubmitSendFunds = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmitSendFunds = (e: any) => {
     e.preventDefault();
     console.log(e.target.elements.amtToSend.value);
   };
