@@ -171,6 +171,7 @@ const useTaquito = () => {
 
       await op.confirmation();
       setMessage({ type: "success", msg: "Vote accepted!" });
+      setReloadScreen(true);
       setLoading(false);
     } catch (error: any) {
       console.log(error.message);
