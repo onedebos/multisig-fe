@@ -45,7 +45,7 @@ export default function Home() {
       )}
       {showScreen === "submitProposal" && <SubmitProposal handleSubmit={handleSubmit} />}
       {showScreen === "sendFunds" && (
-        <SendFundsToContract contractBalance={3} handleSubmitSendFunds={handleSubmitSendFunds} />
+        <SendFundsToContract contractBalance={3} handleSubmitSendFunds={handleSubmitSendFunds} loading={false} />
       )}
     </main>
   );
