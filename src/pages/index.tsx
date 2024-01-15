@@ -12,7 +12,7 @@ export default function Home() {
 
   const proposals = [
     {
-      paymentAmt: "20",
+      paymentAmt: 20,
       votingComplete: true,
       receiver: "tz1ayagi1KJN4Hfiu51CzBFTXuHabVhTUvzD",
       voters: ["tz1ayagi1KJN4Hfiu51CzBFTXuHabVhTUvzD", "tz1ayagi1KJN4Hfiu51CzBFTXuHabVhTUvzD"],
@@ -40,7 +40,9 @@ export default function Home() {
         walletAddress={""}
         disconnectWallet={() => {}}
       />
-      {showScreen === "seeProposals" && <SeeProposals proposals={proposals} contractAddress={contractAddress} />}
+      {showScreen === "seeProposals" && (
+        <SeeProposals proposals={proposals} contractAddress={contractAddress} voteOnProposal={() => {}} />
+      )}
       {showScreen === "submitProposal" && <SubmitProposal handleSubmit={handleSubmit} />}
       {showScreen === "sendFunds" && (
         <SendFundsToContract contractBalance={3} handleSubmitSendFunds={handleSubmitSendFunds} />
