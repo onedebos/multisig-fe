@@ -19,13 +19,13 @@ export default function Home() {
     },
   ];
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(e.target.elements.paymentAmt.value);
     console.log(e.target.elements.receiver.value);
   };
 
-  const handleSubmitSendFunds = (e: any) => {
+  const handleSubmitSendFunds = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(e.target.elements.amtToSend.value);
   };
