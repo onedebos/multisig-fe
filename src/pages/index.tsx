@@ -47,6 +47,7 @@ export default function Home() {
       {showScreen === "sendFunds" && (
         <SendFundsToContract contractBalance={3} handleSubmitSendFunds={handleSubmitSendFunds} loading={false} />
       )}
+      <p>Messages go here!</p>
     </main>
   );
 }
