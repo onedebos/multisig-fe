@@ -36,7 +36,6 @@ export default function Home() {
 
   return (
     <main className="bg-gray-900 p-10 min-h-screen flex gap-4">
-      <p className="text-center">{message.msg}</p>
       <Sidebar
         isConnected={isConnected}
         showScreen={setShowScreen}
@@ -55,6 +54,7 @@ export default function Home() {
           loading={loading}
         />
       )}
+      <p className="text-center text-yellow-500">{message.msg}</p>
     </main>
   );
 }
