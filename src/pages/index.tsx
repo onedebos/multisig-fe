@@ -43,7 +43,7 @@ export default function Home() {
       {showScreen === "seeProposals" && (
         <SeeProposals proposals={proposals} contractAddress={contractAddress} voteOnProposal={() => {}} />
       )}
-      {showScreen === "submitProposal" && <SubmitProposal handleSubmit={handleSubmit} />}
+      {showScreen === "submitProposal" && <SubmitProposal handleSubmit={handleSubmit} loading={false} />}
       {showScreen === "sendFunds" && (
         <SendFundsToContract contractBalance={3} handleSubmitSendFunds={handleSubmitSendFunds} loading={false} />
       )}

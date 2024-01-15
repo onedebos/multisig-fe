@@ -3,8 +3,10 @@ import FormInput from "./FormInput";
 
 interface SubmitProposalProps {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  loading: boolean;
 }
-const SubmitProposal: FunctionComponent<SubmitProposalProps> = ({ handleSubmit }) => {
+
+const SubmitProposal: FunctionComponent<SubmitProposalProps> = ({ handleSubmit, loading }) => {
   return (
     <div className="bg-gray-800 mt-10 rounded-md p-10">
       <h2 className="text-xl mb-4 font-medium">Submit a Proposal</h2>
@@ -18,7 +20,7 @@ const SubmitProposal: FunctionComponent<SubmitProposalProps> = ({ handleSubmit }
           name="receiver"
         />
         <button type="submit" className="bg-green-500 p-2 rounded-md w-full">
-          Submit Proposal
+          {!loading ? "Submit Proposal" : "Loading......"}
         </button>
       </form>
     </div>
