@@ -1,19 +1,20 @@
 import { FunctionComponent } from "react";
+import { shortenAddress } from "../../helpers";
 
 type SidebarProps = {
   isConnected: boolean;
   showScreen: any;
   connectWallet: () => void;
-  walletAddress: string;
   disconnectWallet: () => void;
+  walletAddress: string;
 };
 
 const Sidebar: FunctionComponent<SidebarProps> = ({
   isConnected,
   showScreen,
   connectWallet,
-  walletAddress,
   disconnectWallet,
+  walletAddress,
 }) => {
   return (
     <div className="mt-10 p-10 bg-gray-800 max-w-sm rounded-lg">
@@ -38,12 +39,14 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
           Fund Contract
         </button>
 
-        <button
-          onClick={connectWallet}
-          className={`${!isConnected ? "bg-green-600" : "bg-red-700"} p-2 rounded-md mt-8`}
-        >
-          {!isConnected ? "Connect Wallet" : "Disconnect Wallet"}
-        </button>
+        <div className="mt-8">
+          <button
+            onClick={!isConnected ? connectWallet : disconnectWallet}
+            className={`${!isConnected ? "bg-green-600" : "bg-red-700"} p-2 rounded-md w-full`}
+          >
+            {!isConnected ? "Connect Wallet" : shortenAddress(walletAddress)}
+          </button>
+        </div>
       </div>
     </div>
   );
