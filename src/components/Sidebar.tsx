@@ -4,9 +4,17 @@ type SidebarProps = {
   isConnected: boolean;
   showScreen: any;
   connectWallet: () => void;
+  walletAddress: string;
+  disconnectWallet: () => void;
 };
 
-const Sidebar: FunctionComponent<SidebarProps> = ({ isConnected, showScreen, connectWallet }) => {
+const Sidebar: FunctionComponent<SidebarProps> = ({
+  isConnected,
+  showScreen,
+  connectWallet,
+  walletAddress,
+  disconnectWallet,
+}) => {
   return (
     <div className="mt-10 p-10 bg-gray-800 max-w-sm rounded-lg">
       <h3 className="text-center font-medium text-xl">MultiXTZ Sig</h3>

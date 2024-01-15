@@ -32,7 +32,14 @@ export default function Home() {
 
   return (
     <main className="bg-gray-900 p-10 min-h-screen flex gap-4">
-      <Sidebar isConnected={true} showScreen={setShowScreen} connectWallet={() => {}} />
+      <Sidebar
+        isConnected={true}
+        showScreen={setShowScreen}
+        connectWallet={() => {}}
+        isConnected={() => {}}
+        walletAddress={""}
+        disconnectWallet={() => {}}
+      />
       {showScreen === "seeProposals" && <SeeProposals proposals={proposals} contractAddress={contractAddress} />}
       {showScreen === "submitProposal" && <SubmitProposal handleSubmit={handleSubmit} />}
       {showScreen === "sendFunds" && (
